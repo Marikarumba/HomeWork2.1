@@ -1,14 +1,16 @@
+import java.time.LocalDate;
+
 public class Human {
 
 
-    int age;
-    int yearOfBirth;
-    String name;
-    String city;
-    String job;
+    public int age;
+    private int yearOfBirth;
+    public String name;
+    private String city;
+    public String job;
 
     public Human(int age, String name, String city, String job) {
-        if (age>=0) {
+        if (age>=0 && age<120) {
             this.age = age;
         }else {
             this.age = Math.abs(age);
@@ -26,14 +28,46 @@ public class Human {
             this.city = city;
         }
 
-        this.yearOfBirth = 2022 - age;
+        this.yearOfBirth = LocalDate.now().getYear() - age;
 
-        if (job == null){
-            this.job = "Информация не указана";
+        if (yearOfBirth < 0){
+            this.yearOfBirth = 0;
         }else {
-            this.job = job;
+            this.yearOfBirth = yearOfBirth;
+
+            if (job == null){
+                this.job = "Информация не указана";
+            }else {
+                this.job = job;
+            }
         }
     }
+
+
+    public int getYearOfBirth() {
+        return yearOfBirth;
+    }
+
+    public void setYearOfBirth(int yearOfBirth) {
+        if (yearOfBirth < 0){
+            this.yearOfBirth = 0;
+        }else {
+            this.yearOfBirth = yearOfBirth;
+        }
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        if (city == null){
+            this.city = "Информация не указана";
+        }else {
+            this.city = city;
+        }
+        }
+
 
     public void printHello(){
         System.out.println("Привет! Меня зовут "+name+". Я из города "+city+". " +
